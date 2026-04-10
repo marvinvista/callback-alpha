@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sales Manager Readiness"
+  short_description: "Decide when and who to hire to lead sales"
+  default_prompt: "Use $sales-manager-readiness to assess whether we are ready to hire a sales manager and what profile would fit our current stage."

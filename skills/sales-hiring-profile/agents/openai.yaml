@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sales Hiring Profile"
+  short_description: "Define and hire the right sales talent"
+  default_prompt: "Use $sales-hiring-profile to build a hiring profile, interview loop, and offer approach for this sales role."

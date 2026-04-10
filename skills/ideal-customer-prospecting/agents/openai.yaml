@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ideal Customer Prospecting"
+  short_description: "Define ICPs and source strong prospects"
+  default_prompt: "Use $ideal-customer-prospecting to define our ICP and build a focused prospect list."

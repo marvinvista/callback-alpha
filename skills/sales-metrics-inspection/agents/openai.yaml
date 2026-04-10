@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sales Metrics Inspection"
+  short_description: "Diagnose sales performance from metrics"
+  default_prompt: "Use $sales-metrics-inspection to review these sales metrics and isolate the likely root cause."

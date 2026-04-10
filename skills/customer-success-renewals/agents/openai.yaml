@@ -1,0 +1,4 @@
+interface:
+  display_name: "Customer Success Renewals"
+  short_description: "Drive outcomes, renewals, and expansion"
+  default_prompt: "Use $customer-success-renewals to plan customer onboarding, outcome tracking, and renewal prep."

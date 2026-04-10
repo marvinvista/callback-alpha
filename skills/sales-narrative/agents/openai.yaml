@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sales Narrative"
+  short_description: "Shape a clear B2B sales story"
+  default_prompt: "Use $sales-narrative to turn our product and market context into a sharp sales narrative."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inbound Lead Response"
+  short_description: "Qualify and respond to inbound leads"
+  default_prompt: "Use $inbound-lead-response to qualify this inbound lead and draft the right response."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pipeline Hygiene"
+  short_description: "Keep deals clean, moving, and learnable"
+  default_prompt: "Use $pipeline-hygiene to clean this pipeline and recommend the highest-leverage next actions."

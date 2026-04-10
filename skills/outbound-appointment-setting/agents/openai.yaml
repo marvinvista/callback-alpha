@@ -1,0 +1,4 @@
+interface:
+  display_name: "Outbound Appointment Setting"
+  short_description: "Book first meetings with outbound outreach"
+  default_prompt: "Use $outbound-appointment-setting to draft emails, call tracks, and a cadence for booking meetings."

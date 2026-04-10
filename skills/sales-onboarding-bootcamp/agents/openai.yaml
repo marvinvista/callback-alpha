@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sales Onboarding Bootcamp"
+  short_description: "Build a rigorous sales onboarding plan"
+  default_prompt: "Use $sales-onboarding-bootcamp to design a sales onboarding plan, drills, and ramp checkpoints."

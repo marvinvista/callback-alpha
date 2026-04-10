@@ -1,0 +1,510 @@
+version: 1
+rubric: evals/sales-skills/rubric.md
+command_template: 'codex exec --skip-git-repo-check -s read-only "<prompt>"'
+skills:
+  - skill: sales-narrative
+    skill_path: skills/sales-narrative/SKILL.md
+    contract_sections:
+      - Problem
+      - Buyer
+      - Current Alternative
+      - Why Change Now
+      - How It Works
+      - Why It Is Better
+      - Proof
+      - Pricing Frame
+      - 30-second pitch
+      - 2-minute pitch
+      - Sales deck storyline
+    cases:
+      - id: sales-narrative-basic
+        difficulty: core
+        prompt: >
+          We sell a workflow tool that helps RevOps teams catch broken Salesforce automations before they hurt pipeline.
+          Give me a first-call sales narrative, a 30-second pitch, a 2-minute pitch, and a 7-slide sales deck storyline.
+        must_include:
+          - Names the buyer clearly
+          - States the current alternative
+          - Explains why change now
+          - Gives a proof section without inventing evidence
+        should_not_include:
+          - ICP tiers
+          - outbound sequence copy
+      - id: sales-narrative-proof-gap
+        difficulty: boundary
+        prompt: >
+          We are pre-launch. We help procurement teams summarize vendor risk questionnaires faster, but we have no paying customers yet
+          and pricing is still undecided. Build the narrative pack and be explicit about assumptions.
+        must_include:
+          - Evidence gap called out explicitly
+          - Pricing frame presented as a hypothesis
+          - Buyer and workflow pain
+        should_not_include:
+          - fabricated traction
+          - fake customer quotes
+      - id: sales-narrative-feature-heavy-rewrite
+        difficulty: stress
+        prompt: >
+          Our current explanation is messy: "We use AI agents, workflow graphs, alerts, audit logs, warehouse sync, custom scoring,
+          stakeholder maps, and approval chains." Turn that into a buyer-facing narrative for a deal-review product sold to sales managers.
+        must_include:
+          - Problem-first framing
+          - Buyer language instead of architecture language
+          - Why the product is better than the status quo
+        should_not_include:
+          - raw feature list as the main answer
+
+  - skill: ideal-customer-prospecting
+    skill_path: skills/ideal-customer-prospecting/SKILL.md
+    contract_sections:
+      - ICP summary
+      - Required traits
+      - Positive signals
+      - Disqualifiers
+      - Priority tiers
+      - Contact map
+      - Discovery questions
+      - First sourcing plan
+    cases:
+      - id: ideal-customer-prospecting-payroll
+        difficulty: core
+        prompt: >
+          We sell a payroll exception detection tool for multi-state hourly employers. Define our ICP, disqualifiers, discovery questions,
+          and the first 10 accounts I should target.
+        must_include:
+          - Bounded prioritized list, not a market dump
+          - Explicit disqualifiers
+          - Contact map with likely buyer roles
+          - Reasoning for why top accounts fit
+        should_not_include:
+          - cold outreach copy
+          - unnecessary repo reconnaissance when the prompt is already clear
+      - id: ideal-customer-prospecting-boundary
+        difficulty: boundary
+        prompt: >
+          We sell board-deck automation to B2B SaaS CFOs. We only want venture-backed companies between 100 and 800 employees.
+          Tell me who to target, who to avoid, and how to score fit.
+        must_include:
+          - Segment limits reflected in the ICP
+          - Anti-signals and exclusions
+          - Simple scoring rubric
+        should_not_include:
+          - sales deck storyline
+          - outbound cadence
+      - id: ideal-customer-prospecting-disqualifier-discipline
+        difficulty: stress
+        prompt: >
+          Help me target companies for an enterprise security audit platform, but I do not want tiny startups, heavily outsourced security teams,
+          or companies without internal compliance owners. Build the first-wave prospecting logic.
+        must_include:
+          - Strong exclusion logic
+          - Discovery questions for invisible traits
+          - First sourcing motion
+        should_not_include:
+          - any broad, undifferentiated targeting
+
+  - skill: outbound-appointment-setting
+    skill_path: skills/outbound-appointment-setting/SKILL.md
+    contract_sections:
+      - First-touch email
+      - Call opener
+      - Voicemail
+      - Follow-up sequence
+      - Common objection responses
+      - Meeting invite copy
+      - Reminder note
+    cases:
+      - id: outbound-appointment-setting-revops
+        difficulty: core
+        prompt: >
+          Write a cold email, call opener, voicemail, follow-up sequence, objection responses, meeting invite copy, and reminder note
+          to book meetings with Directors of Revenue Operations at SaaS companies using Salesforce and Marketo.
+        must_include:
+          - Clear ask for time on the calendar
+          - Relevance-based opener
+          - Objection handling for first meetings
+        should_not_include:
+          - long company biography
+          - ICP design
+      - id: outbound-appointment-setting-send-info
+        difficulty: boundary
+        prompt: >
+          We sell AP automation to controllers at multi-entity companies. Give me outbound copy plus specific responses for
+          "send me info" and "maybe next quarter."
+        must_include:
+          - Response that preserves momentum
+          - Follow-up touch plan
+          - Direct booking CTA
+        should_not_include:
+          - passive acceptance of "send me info" with no next step
+      - id: outbound-appointment-setting-booked-meeting
+        difficulty: stress
+        prompt: >
+          A prospect already agreed to a first meeting. Give me the invite title, agenda, confirmation note, and a short reminder
+          for a 30-minute intro call about warehouse inventory forecasting software.
+        must_include:
+          - Meeting invite copy
+          - Reminder note
+          - Agenda appropriate for a first meeting
+        should_not_include:
+          - full demo script
+
+  - skill: inbound-lead-response
+    skill_path: skills/inbound-lead-response/SKILL.md
+    contract_sections:
+      - Lead classification
+      - Why it fits or does not fit
+      - Response draft
+      - Discovery questions
+      - Recommended next step
+      - Follow-up timing
+    cases:
+      - id: inbound-lead-response-hot
+        difficulty: core
+        prompt: >
+          A VP of Sales Ops at a 250-person SaaS company filled out our demo form saying they are evaluating pipeline inspection tools this quarter.
+          Qualify the lead, tell me what tier it is, and draft the response.
+        must_include:
+          - Direct classification from the prompt
+          - Fast next step
+          - Short discovery, if any
+        should_not_include:
+          - long qualification questionnaire
+          - unnecessary repo lookup behavior
+      - id: inbound-lead-response-warm
+        difficulty: boundary
+        prompt: >
+          A mutual contact introduced us to an operations manager at a regional logistics company. They said "this may be relevant"
+          but gave no timeline. How should we classify it and what should we send back?
+        must_include:
+          - Warm or unclear logic
+          - No more than three discovery questions
+          - Recommended next step
+        should_not_include:
+          - treating the lead as hot without evidence
+      - id: inbound-lead-response-disqualify
+        difficulty: stress
+        prompt: >
+          A three-person consulting shop asked for a demo of our enterprise procurement workflow software, but our product only works
+          for teams with at least 50 requesters and an internal procurement function. Classify and draft the reply.
+        must_include:
+          - Polite disqualification
+          - Why it does not fit
+          - Graceful next step or redirect
+        should_not_include:
+          - wasteful meeting recommendation
+
+  - skill: demo-and-closing
+    skill_path: skills/demo-and-closing/SKILL.md
+    contract_sections:
+      - Pre-call plan
+      - Discovery questions
+      - Demo flow
+      - Likely objections and responses
+      - Pricing frame
+      - Direct ask
+      - Proposal options
+      - Post-call next steps
+    cases:
+      - id: demo-and-closing-standard
+        difficulty: core
+        prompt: >
+          We are meeting a Head of RevOps at a 500-person SaaS company evaluating pipeline inspection tools. They care about forecast accuracy,
+          manager inspection quality, and deal-risk visibility. Build the call plan, demo flow, pricing frame, and close.
+        must_include:
+          - Discovery before demo
+          - Pain-mapped demo flow
+          - Direct ask
+        should_not_include:
+          - feature parade
+      - id: demo-and-closing-proposal-options
+        difficulty: boundary
+        prompt: >
+          The buyer is interested but not ready to sign. They want options for piloting our customer onboarding orchestration software.
+          Give me proposal options and recommend one.
+        must_include:
+          - Proposal options
+          - Recommended option
+          - Post-call next step
+        should_not_include:
+          - vague "let me know" close
+      - id: demo-and-closing-objections
+        difficulty: stress
+        prompt: >
+          I need help with a pricing call for a compliance workflow product. The buyer says the price is high, spreadsheets are good enough,
+          and security review will slow everything down. Build the objection handling and close strategy.
+        must_include:
+          - Objections handled one at a time
+          - Pricing frame in context
+          - Direct ask or concrete next step
+        should_not_include:
+          - defensive or evasive language
+
+  - skill: pipeline-hygiene
+    skill_path: skills/pipeline-hygiene/SKILL.md
+    contract_sections:
+      - Immediate priorities
+      - Stale deals
+      - Deals to close lost
+      - Required next actions
+      - Loss-reason themes
+      - Future follow-up notes
+    cases:
+      - id: pipeline-hygiene-basic
+        difficulty: core
+        prompt: >
+          Review this pipeline and tell me what to do:
+          Deal A: Proposal, last touch 3 days ago, next step scheduled.
+          Deal B: Demo, last touch 28 days ago, no next step.
+          Deal C: Discovery, last touch 41 days ago, buyer said "circle back later."
+          Deal D: Security review, last touch 9 days ago, blocker is legal questionnaire.
+          Deal E: Proposal, last touch 52 days ago, buyer ghosted after pricing.
+        must_include:
+          - Immediate priorities
+          - Clear stale and close-lost calls
+          - Required next actions for retained deals
+        should_not_include:
+          - keeping every deal alive
+      - id: pipeline-hygiene-loss-discipline
+        difficulty: boundary
+        prompt: >
+          Our team hates marking deals closed lost. Give me a cleanup recommendation for 12 opportunities older than 45 days,
+          most with vague notes like "timing" or "follow up later."
+        must_include:
+          - Loss-reason discipline
+          - Distinction between not-now and never
+          - Future follow-up notes
+        should_not_include:
+          - generic reminder to follow up later on every deal
+      - id: pipeline-hygiene-weekly-rhythm
+        difficulty: stress
+        prompt: >
+          We need a weekly pipeline review rhythm for an AE team where stages are cluttered, next steps are inconsistent,
+          and managers cannot tell which deals are actually moving.
+        must_include:
+          - Weekly review rhythm
+          - Stage cleanup logic
+          - Concrete next-action requirement
+        should_not_include:
+          - ICP redesign
+
+  - skill: customer-success-renewals
+    skill_path: skills/customer-success-renewals/SKILL.md
+    contract_sections:
+      - Success outcomes
+      - Implementation plan
+      - Health signals
+      - Communication rhythm
+      - Risks and mitigations
+      - Renewal plan
+      - Expansion signals
+    cases:
+      - id: customer-success-renewals-new-logo
+        difficulty: core
+        prompt: >
+          A new customer signed a 12-month contract for our revenue-forecasting software. They want better forecast accuracy
+          and faster weekly inspections. Build the success plan from kickoff through renewal.
+        must_include:
+          - Customer outcomes
+          - Implementation plan with milestones
+          - Renewal plan before the final month
+        should_not_include:
+          - activity-only success measures
+      - id: customer-success-renewals-risk
+        difficulty: boundary
+        prompt: >
+          A customer is 7 months into the term, adoption is low, the exec sponsor changed, and the team is using only one workflow
+          out of five. Give me the renewal risk review and recovery plan.
+        must_include:
+          - Risks and mitigations
+          - Communication rhythm
+          - Renewal strategy
+        should_not_include:
+          - automatic expansion suggestion
+      - id: customer-success-renewals-expansion-discipline
+        difficulty: stress
+        prompt: >
+          The account is healthy in one department but the core value case is still thin outside that team. Should we push expansion now?
+          Build the answer and success plan.
+        must_include:
+          - Expansion only if justified
+          - Base value case assessment
+          - Clear health signals
+        should_not_include:
+          - forced cross-sell recommendation
+
+  - skill: sales-metrics-inspection
+    skill_path: skills/sales-metrics-inspection/SKILL.md
+    contract_sections:
+      - Observed metric changes
+      - Likely root cause
+      - Supporting evidence
+      - Alternative explanations
+      - Missing data
+      - Recommended actions
+    cases:
+      - id: sales-metrics-inspection-sdr
+        difficulty: core
+        prompt: >
+          Our SDR team is sending plenty of emails but meetings are down 40 percent month over month while response rates are flat
+          and connect rates are falling. Diagnose the most likely issues and tell me what to inspect next.
+        must_include:
+          - Root-cause hypothesis
+          - Alternative explanations
+          - Next inspection step
+        should_not_include:
+          - simplistic "work harder" diagnosis
+      - id: sales-metrics-inspection-ambiguous-ae
+        difficulty: boundary
+        prompt: >
+          An AE's average deal size is up, win rate is down, and cycle length is up versus last quarter. We do not know whether the issue
+          is targeting, pricing, or stage management. Diagnose carefully.
+        must_include:
+          - Multiple plausible explanations
+          - Missing data called out
+          - Recommended next cuts to inspect
+        should_not_include:
+          - overconfident single-cause claim
+      - id: sales-metrics-inspection-no-baseline
+        difficulty: stress
+        prompt: >
+          Why is our funnel bad? I only have this month’s aggregate totals and no historical baseline or segment breakdown.
+        must_include:
+          - Data-gap acknowledgment
+          - Missing baseline called out
+          - Concrete next data to collect
+        should_not_include:
+          - fake certainty
+
+  - skill: sales-hiring-profile
+    skill_path: skills/sales-hiring-profile/SKILL.md
+    contract_sections:
+      - Role definition
+      - Must-have traits
+      - Red flags
+      - Interview loop
+      - Scorecard
+      - Compensation guardrails
+      - Offer and close plan
+    cases:
+      - id: sales-hiring-profile-first-ae
+        difficulty: core
+        prompt: >
+          We need to hire our first AE for a mid-market B2B workflow product. Define the role, interview loop, scorecard,
+          compensation guardrails, and candidate close plan.
+        must_include:
+          - Stage-appropriate role definition
+          - Interview loop
+          - Scorecard
+        should_not_include:
+          - generic "hunter" clichés with no role detail
+      - id: sales-hiring-profile-manager
+        difficulty: boundary
+        prompt: >
+          We already decided to hire a frontline sales manager. Build the hiring packet for the role without inflating it into a VP seat.
+        must_include:
+          - Manager-specific role definition
+          - Red flags against title inflation
+          - Offer and close plan
+        should_not_include:
+          - readiness verdict
+      - id: sales-hiring-profile-overstuffed-role
+        difficulty: stress
+        prompt: >
+          Our draft job asks one person to source pipeline, close deals, run onboarding, own renewals, and build RevOps.
+          Clean this up into a real role and hiring packet.
+        must_include:
+          - Narrowed role scope
+          - Must-have traits tied to the actual motion
+          - Compensation guardrails
+        should_not_include:
+          - acceptance of the overstuffed scope
+
+  - skill: sales-onboarding-bootcamp
+    skill_path: skills/sales-onboarding-bootcamp/SKILL.md
+    contract_sections:
+      - Ramp goal
+      - Pre-work
+      - Bootcamp modules
+      - Drills and repetitions
+      - Shadowing and live-call ramp
+      - KPIs and checkpoints
+      - Ongoing coaching cadence
+    cases:
+      - id: sales-onboarding-bootcamp-ae
+        difficulty: core
+        prompt: >
+          Design a 60-day onboarding plan for a new AE joining a B2B SaaS company that sells forecasting software to sales leaders.
+          Include drills, shadowing, and measurable checkpoints.
+        must_include:
+          - Ramp goal
+          - Drills and repetitions
+          - KPIs and checkpoints
+        should_not_include:
+          - ad hoc "read some docs" onboarding
+      - id: sales-onboarding-bootcamp-sdr
+        difficulty: boundary
+        prompt: >
+          Build a 30-day SDR bootcamp for an outbound-heavy team. We need pre-work, day-one readiness, call drills,
+          shadowing, and a live-call ramp.
+        must_include:
+          - Day-one readiness
+          - Explicit practice structure
+          - Shadowing and live-call ramp
+        should_not_include:
+          - only product training with no repetitions
+      - id: sales-onboarding-bootcamp-measurable
+        difficulty: stress
+        prompt: >
+          Our current onboarding is a pile of docs and random meetings. Replace it with a measurable bootcamp for customer success managers.
+        must_include:
+          - Structured modules
+          - Ongoing coaching cadence
+          - Measurable checkpoint logic
+        should_not_include:
+          - vague orientation plan
+
+  - skill: sales-manager-readiness
+    skill_path: skills/sales-manager-readiness/SKILL.md
+    contract_sections:
+      - Readiness verdict
+      - Why
+      - Missing exit criteria
+      - Recommended manager profile
+      - Scope of role
+      - First 90-day priorities
+      - Handoff risks
+    cases:
+      - id: sales-manager-readiness-ready
+        difficulty: core
+        prompt: >
+          We have two AEs who can close consistently, one SDR, and I am still reviewing pipeline and coaching everyone myself.
+          Is it time to hire a sales manager? If yes, what profile should I hire and what should their first 90 days be?
+        must_include:
+          - Clear readiness verdict
+          - Profile appropriate to current scale
+          - First 90-day priorities
+        should_not_include:
+          - title inflation
+      - id: sales-manager-readiness-not-yet
+        difficulty: boundary
+        prompt: >
+          I am still the only seller who can consistently close, our qualification process changes every month, and onboarding for new reps is ad hoc.
+          Should I hire a sales manager now?
+        must_include:
+          - Not-yet verdict
+          - Missing exit criteria
+          - Constructive next steps
+        should_not_include:
+          - premature manager recommendation
+      - id: sales-manager-readiness-team-lead
+        difficulty: stress
+        prompt: >
+          We have one AE and one SDR. The AE mainly needs day-to-day coaching, but I still want to own hiring and broader sales design.
+          Do I need a true manager, a team lead, or another seller?
+        must_include:
+          - Distinction between IC, team lead, and manager
+          - Scope logic
+          - Handoff risks
+        should_not_include:
+          - defaulting to a full manager without justification

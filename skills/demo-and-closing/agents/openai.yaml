@@ -1,0 +1,4 @@
+interface:
+  display_name: "Demo and Closing"
+  short_description: "Run demos, handle objections, close"
+  default_prompt: "Use $demo-and-closing to structure this sales call, handle objections, and ask for the business."
